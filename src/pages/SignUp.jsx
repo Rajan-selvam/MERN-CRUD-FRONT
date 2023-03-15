@@ -27,6 +27,7 @@ export default function SignUp() {
     }
     const apiData = {
       name: data.get('name'),
+      userName: data.get('userName'),
       dob: data.get('dob'),
       mob_no: data.get('mob_no'),
       email: data.get('email'),
@@ -48,7 +49,7 @@ export default function SignUp() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 2,
+            // marginTop: 2,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -70,6 +71,17 @@ export default function SignUp() {
                   fullWidth
                   id="name"
                   label="Name"
+                  autoFocus
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="given-name"
+                  name="userName"
+                  required
+                  fullWidth
+                  id="userName"
+                  label="userName"
                   autoFocus
                 />
               </Grid>

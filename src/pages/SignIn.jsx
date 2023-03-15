@@ -21,7 +21,7 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const apiData = {
-      mob_no: data.get('mob_no'),
+      user_email: data.get('user_email'),
       password: data.get('password'),
     };
     axios.post('http://localhost:8080/api/login ', apiData).then((res) => {
@@ -52,13 +52,22 @@ export default function SignIn() {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
+            {/* <TextField
               margin="normal"
               required
               fullWidth
               id="mob_no"
               label="Mobile Number"
               name="mob_no"
+              autoFocus
+            /> */}
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="user_email"
+              label="User Name Or Email"
+              name="user_email"
               autoFocus
             />
             <TextField

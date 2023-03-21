@@ -1,0 +1,51 @@
+.bold {
+     font-size: 16px;
+     font-weight: 500;
+}
+.page-body {
+    position: relative;
+    margin: 100px;
+}
+.product-container {
+    text-align: left;
+    margin: 50px;
+    padding-left: 200px;
+}
+.button {
+    border-radius: 5px;
+    border: none;
+    background-color: dodgerblue;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 10px;
+    padding: 5px 15px;
+}
+.button1 {
+    border-radius: 5px;
+    border: none;
+    background-color: dodgerblue;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 10px;
+    padding: 5px 15px;
+}
+.button:hover, .button1:hover {
+    background-color: blue;
+}
+.cart-span {
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.remove {
+    color: red;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.cart-container {
+    margin: 20px;
+    display: flex;
+    justify-content:space-evenly;
+}

@@ -15,6 +15,7 @@ import {
   addCart,
   updateCart,
   removeCart,
+  cleartCart
 } from "../store/cartSlice";
 
 const style = {
@@ -70,11 +71,17 @@ const ListCard = () => {
   };
 
   const BillingHandler = () => {
+    alert('Cart products moved to billing');
     dispatch(
         addBilling({
             product: cartData,
         })
     );
+    dispatch(
+      cleartCart()
+    )
+    setOpenModal(false);
+
   }
   // console.log('cartData', cartData);
   const ProductData = (
@@ -124,12 +131,12 @@ const ListCard = () => {
               >
                 Add to Cart
               </button>
-              <button
+              {/* <button
                 onClick={(e) => removeCartHandler(e, product.id)}
                 className="button"
               >
                 Remove From Cart
-              </button>
+              </button> */}
             </div>
           </div>
         ))}

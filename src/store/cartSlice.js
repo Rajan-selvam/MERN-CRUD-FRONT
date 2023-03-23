@@ -36,9 +36,12 @@ export const cartSlice = createSlice({
     addBilling: (state, action) => {
       state.billing = [...action.payload.product];
     },
+    cleartCart: (state) => {
+      state.cart = [];
+    }
   },
 });
 
-export const { addCart, updateCart, removeCart, addBilling } = cartSlice.actions;
+export const { addCart, updateCart, removeCart, addBilling, cleartCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

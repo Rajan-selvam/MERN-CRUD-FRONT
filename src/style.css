@@ -4,12 +4,14 @@
 }
 .page-body {
     position: relative;
-    margin: 100px;
+    margin-top: 100px;
+    margin-left: 60px;
 }
 .product-container {
+    display: flex;
+    flex-wrap: wrap;
     text-align: left;
-    margin: 50px;
-    padding-left: 200px;
+    margin-top: 40px;
 }
 .button {
     border-radius: 5px;
@@ -37,7 +39,7 @@
 .cart-span {
     margin-right: 15px;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
 }
 .remove {
     color: red;
@@ -45,7 +47,30 @@
     cursor: pointer;
 }
 .cart-container {
-    margin: 20px;
     display: flex;
-    justify-content:space-evenly;
+    justify-content:space-between;
+}
+.mt-45 {
+    margin-top: 45px;
+}
+.cart-container > .img {
+    padding: 10px;
+    padding-top: 20px;
+    width: 100px;
+}
+.cart-actions {
+    margin-right: 35px;
+}
+.cart-actions > span {
+    margin: 0 10px;
+}
+.cart-footer {
+    margin-top: 50px;
+}
+.cart-details {
+    width: 500px;
+}
+.billing {
+    margin-top: 20px;
+    height: 35px;
 }

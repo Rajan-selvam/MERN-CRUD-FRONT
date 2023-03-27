@@ -67,7 +67,6 @@ const Cart = () => {
         total: cartData?.total,
       })
     );
-    // dispatch(cleartCart());
     setOpenModal(true);
   };
   console.log("billing", billing);
@@ -207,7 +206,10 @@ const Cart = () => {
           <div className="cart-footer">
             <Typography>Total Amount to Pay : {commafy(billing?.total)}</Typography>
             {billing?.product?.length > 0 && (
-              <button className="button billing" onClick={() =>  alert(`Confirm Pay Handler`)}>
+              <button className="button billing" onClick={() =>  {
+                  dispatch(cleartCart());
+                  alert(`Confirm Pay Handler`)
+                }}>
                 Confirm to Pay
               </button>
             )}

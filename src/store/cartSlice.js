@@ -5,7 +5,10 @@ const initialState = {
     product: [],
     total: 0,
   },
-  billing: [],
+  billing: {
+    product: [],
+    total: 0,
+  },
 };
 
 export const cartSlice = createSlice({
@@ -61,7 +64,8 @@ export const cartSlice = createSlice({
       state.cart.product = state.cart.product.filter((item) => item.id !== id);
     },
     addBilling: (state, action) => {
-      state.billing = [...action.payload.product];
+      state.billing.product = [...action.payload.product];
+      state.billing.total = action.payload.total;
     },
     cleartCart: (state) => {
       state.cart.product = [];

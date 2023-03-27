@@ -34,7 +34,7 @@ const style = {
 const Cart = () => {
   const dispatch = useDispatch();
   const [openModal, setOpenModal] = useState(false);
-  const { cart: cartData } = useSelector((state) => state.cart);
+  const { cart: cartData, billing } = useSelector((state) => state.cart);
 
   const removeCartHandler = (e, id) => {
     e.preventDefault();
@@ -55,21 +55,22 @@ const Cart = () => {
       );
       document.getElementById(key).value = 1;
     } else {
-       alert('Enter Numberic Value');
-       document.getElementById(key).value = 1;
+      alert("Enter Numberic Value");
+      document.getElementById(key).value = 1;
     }
   };
 
   const BillingHandler = () => {
     dispatch(
       addBilling({
-        product: cartData,
+        product: cartData?.product,
+        total: cartData?.total,
       })
     );
-    dispatch(cleartCart());
+    // dispatch(cleartCart());
     setOpenModal(true);
   };
-  console.log("cartData", cartData);
+  console.log("billing", billing);
   return (
     <Container sx={{ marginTop: 15 }}>
       <div>
@@ -93,13 +94,15 @@ const Cart = () => {
                   Name : <span className="cart-span">{cart?.name}</span>
                 </p>
                 <p>
-                  Price : <span className="cart-span">{commafy(cart?.price)}</span>
+                  Price :{" "}
+                  <span className="cart-span">{commafy(cart?.price)}</span>
                 </p>
                 <p>
                   quantity : <span className="cart-span">{cart?.quantity}</span>
                 </p>
                 <p>
-                  Net Amount : <span className="cart-span">{commafy(cart?.netAmount)}</span>
+                  Net Amount :{" "}
+                  <span className="cart-span">{commafy(cart?.netAmount)}</span>
                 </p>
               </div>
               <div className="mt-45 cart-actions">
@@ -145,60 +148,72 @@ const Cart = () => {
           </button>
         )}
       </div>
-      {/* <Modal
-      open={openModal}
-      onClose={() => setOpenModal(false)}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <Box sx={style}>
-        <div>
-          <h3>Cart</h3>
-        </div>
-        {!cartData && <div>No Product Found In Cart</div>}
-        <div>
-          {cartData?.map((cart, i) => (
-            <div className="cart-container" key={i}>
-              <div>
-                Name : <span className="cart-span">{cart?.name}</span>
-              </div>
-              <div>
-                Price : <span className="cart-span">{cart?.price}</span>
-              </div>
-              <div>
-                quantity : <span className="cart-span">{cart?.quantity}</span>
-              </div>
-              <div>
-                <a
-                  onClick={(e) => removeCartHandler(e, cart?.id)}
-                  className="remove"
-                >
-                  Remove
-                </a>
-              </div>
-              <div>
-                <input type="number" id={`quantity${cart.id}`} />
-              </div>
-              <div>
-                <button
-                  className="button1"
-                  onClick={(e) =>
-                    updateCartHandler(e, cart, `quantity${cart.id}`)
-                  }
-                >
-                  Update
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div>
-          <button className="button" onClick={BillingHandler}>
-            Proceed to Pay
-          </button>
-        </div>
-      </Box>
-    </Modal> */}
+      <Modal
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <div>
+            <h3>Check Out</h3>
+          </div>
+          <div>
+            <TextField size="small" sx={{marginBottom: 1, marginRight: 1 }} placeholder="name" />
+            <TextField size="small" sx={{marginBottom: 1, marginRight: 1}} placeholder="Mobile" />
+            <TextField size="small" sx={{marginBottom: 1, marginRight: 1}} placeholder="Email" />
+            <TextField size="small" sx={{marginBottom: 1, marginRight: 1}} placeholder="Address" />
+          </div>
+          {!billing && <div>No Product Found In Cart</div>}
+          <div>
+            {billing?.product?.map((cart, i) => (
+              <Paper
+                elevation={3}
+                sx={{ minHeight: 100, marginTop: 2 }}
+                key={i}
+              >
+                <div className="cart-container">
+                  <div className="img">
+                    <CardMedia
+                      component="img"
+                      height="100"
+                      image={cart?.image}
+                      alt={cart?.name}
+                    />
+                  </div>
+                  <div className="cart-details">
+                    <p>
+                      Name : <span className="cart-span">{cart?.name}</span>
+                    </p>
+                    <p>
+                      Price :{" "}
+                      <span className="cart-span">{commafy(cart?.price)}</span>
+                    </p>
+                    <p>
+                      quantity :{" "}
+                      <span className="cart-span">{cart?.quantity}</span>
+                    </p>
+                    <p>
+                      Net Amount :{" "}
+                      <span className="cart-span">
+                        {commafy(cart?.netAmount)}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </Paper>
+            ))}
+          </div>
+          <div className="cart-footer">
+            <Typography>Total Amount to Pay : {commafy(billing?.total)}</Typography>
+            {billing?.product?.length > 0 && (
+              <button className="button billing" onClick={() =>  alert(`Confirm Pay Handler`)}>
+                Confirm to Pay
+              </button>
+            )}
+          </div>
+        </Box>
+      </Modal>
     </Container>
   );
 };
